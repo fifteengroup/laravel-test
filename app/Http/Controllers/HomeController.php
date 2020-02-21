@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $recentOrders = Order::orderBy('id', 'desc')->take(10)->get();
+        
+        return view('home', compact('recentOrders'));
     }
 }

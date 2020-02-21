@@ -78,4 +78,17 @@ class CompaniesController extends Controller
         return redirect('companies')->with('alert', 'Company updated!');
     }
 
+    /**
+     * Return list of contacts assigned to company
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getContacts($id)
+    {
+        $company = Company::find($id);
+
+        return $company->contacts->pluck('full_name', 'id');
+    }
+
 }

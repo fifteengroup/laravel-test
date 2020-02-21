@@ -28,6 +28,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('companies/create', 'CompaniesController@store')->name('companies-store');
     Route::get('companies/{company}/edit', 'CompaniesController@edit')->name('companies-edit');
     Route::post('companies/{company}/update', 'CompaniesController@update')->name('companies-update');
+    Route::get('companies/contacts/{id}', 'CompaniesController@getContacts')->name('companies-contacts');
+
+    Route::resource('orders', 'OrdersController', ['names' => [
+        'index'  => 'orders',
+        'create' => 'orders-create',
+        'store'  => 'orders-store',
+        'show'   => 'orders-show'
+    ]]);
 });
 
 

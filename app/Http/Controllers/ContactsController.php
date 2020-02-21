@@ -27,7 +27,8 @@ class ContactsController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = Contact::with(['company', 'contactRole'])->get();
+     
         return view('contacts.index', compact(['contacts']));
     }
 
@@ -37,9 +38,10 @@ class ContactsController extends Controller
      */
     public function create()
     {
-        $contact = new Contact;
-        $companies = Company::pluck('name', 'id');
+        $contact      = new Contact;
+        $companies    = Company::pluck('name', 'id');
         $contactRoles = ContactRole::pluck('name', 'id');
+
         return view('contacts.create', compact(['contact', 'companies', 'contactRoles']));
     }
 
@@ -50,7 +52,9 @@ class ContactsController extends Controller
      */
     public function store(CreateContact $request)
     {
-        Contact::create($request->all());
+        $contact = Contact::create($request->all());
+        $contact->contactAddresses()->create($request->all());
+
         return redirect('contacts')->with('alert', 'Contact created!');
     }
 
@@ -61,8 +65,9 @@ class ContactsController extends Controller
      */
     public function edit(Contact $contact)
     {
-        $companies = Company::pluck('name', 'id');
+        $companies    = Company::pluck('name', 'id');
         $contactRoles = ContactRole::pluck('name', 'id');
+
         return view('contacts.edit', compact(['contact', 'companies', 'contactRoles']));
     }
 
@@ -75,6 +80,8 @@ class ContactsController extends Controller
     public function update(UpdateContact $request, Contact $contact)
     {
         $contact->update($request->all());
+        $contact->contactAddresses()->create($request->all());
+        
         return redirect('contacts')->with('alert', 'Contact updated!');
     }
 }

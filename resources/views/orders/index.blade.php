@@ -7,10 +7,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="btn-group float-right" role="group">
-                            <a href="{{ route('companies-create') }}" class="btn btn-success">Add new</a>
+                            <a href="{{ route('orders-create') }}" class="btn btn-success">Add new</a>
                         </div>
                         <h2>
-                            Companies
+                            Orders
                         </h2>
                     </div>
 
@@ -19,21 +19,20 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Company Type</th>
-                                <th>Company Status</th>
+                                <th>Company</th>
+                                <th>Items</th>
+                                <th>Date Ordered</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($companies as $company)
+                            @foreach($orders as $order)
                                 <tr>
-                                    <td>{{ $company->id }}</td>
-                                    <td>{{ $company->name }}</td>
-                                    <td>{{ $company->companyType->name }}</td>
-                                    <td>{{ $company->companyStatus->name }}</td>
-                                    <td><a href="{{ route('companies-edit', $company) }}"
-                                           class="btn btn-primary">Edit</a></td>
+                                    <td>{{ $order->id }}</td>
+                                    <td>{{ $order->company->name }}</td>
+                                    <td>{{ count($order->items) }}</td>
+                                    <td>{{ date('d/m/Y H:i', strtotime($order->created_at)) }}</td>
+                                    <td><a href="{{ route('orders-show', $order) }}" class="btn btn-primary">View</a></td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -43,7 +42,4 @@
             </div>
         </div>
     </div>
-
-
-
 @endsection

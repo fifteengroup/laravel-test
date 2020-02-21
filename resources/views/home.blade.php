@@ -57,6 +57,23 @@
                         </li>
                     </ol>
 
+                    @if($recentOrders)
+                        <table class="table">
+                            <thead>
+                                <tr><th>Order Number</th><th>Company Name</th><th>Contact Name</th><th>Number of Items</th><th>Date Placed</th></tr>
+                            </thead>
+                            <tbody>
+                            @foreach($recentOrders as $recentOrder)
+                                <tr>
+                                    <td>{{ $recentOrder->id }}</td>
+                                    <td>{{ $recentOrder->company->name }}</td>
+                                    <td>{{ $recentOrder->contact->full_name }}</td>
+                                    <td>{{ count($recentOrder->items) }}</td>
+                                    <td>{{ date('d/m/Y H:i', strtotime($recentOrder->created_at)) }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    @endif
                 </div>
             </div>
         </div>
