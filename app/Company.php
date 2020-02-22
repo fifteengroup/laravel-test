@@ -65,4 +65,12 @@ class Company extends Model
         return $this->belongsTo(CompanyStatus::class);
     }
 
+     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function order()
+    {
+        return $this->hasMany(order::class);
+    }
+
 }

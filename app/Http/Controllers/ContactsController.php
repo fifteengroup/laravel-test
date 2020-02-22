@@ -27,7 +27,7 @@ class ContactsController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = Contact::paginate(10);
         return view('contacts.index', compact(['contacts']));
     }
 
@@ -40,6 +40,7 @@ class ContactsController extends Controller
         $contact = new Contact;
         $companies = Company::pluck('name', 'id');
         $contactRoles = ContactRole::pluck('name', 'id');
+
         return view('contacts.create', compact(['contact', 'companies', 'contactRoles']));
     }
 
@@ -51,6 +52,7 @@ class ContactsController extends Controller
     public function store(CreateContact $request)
     {
         Contact::create($request->all());
+
         return redirect('contacts')->with('alert', 'Contact created!');
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\order;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -50,5 +51,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Company::class, 500)->create()->each(function ($c) {
             $c->contacts()->saveMany(factory(App\Contact::class, rand(1,5))->make());
         });
+
+        factory(App\order::class, 40)->create();
     }
 }

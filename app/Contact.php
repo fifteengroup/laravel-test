@@ -39,7 +39,9 @@ class Contact extends Model
     protected $fillable = [
         'first_name',
         'last_name',
-        'company_id'
+        'company_id',
+        'contact_role_id',
+        'address'
     ];
 
     /**
@@ -56,6 +58,13 @@ class Contact extends Model
     public function contactRole()
     {
         return $this->belongsTo(ContactRole::class);
+    }
+     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function order()
+    {
+        return $this->hasMany(order::class);
     }
 
 }

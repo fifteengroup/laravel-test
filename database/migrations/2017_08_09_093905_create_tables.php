@@ -59,9 +59,11 @@ class CreateTables extends Migration
             $table->foreign('contact_role_id')
                 ->references('id')
                 ->on('contact_roles');
+            $table->text('address');
 
             $table->timestamps();
         });
+
 
     }
 

@@ -31,7 +31,7 @@
                                     <td>{{ $company->id }}</td>
                                     <td>{{ $company->name }}</td>
                                     <td>{{ $company->companyType->name }}</td>
-                                    <td>{{ $company->company_status }}</td>
+                                    <td>{{ $company->company_status_id }}</td>
                                     <td><a href="{{ route('companies-edit', $company) }}"
                                            class="btn btn-primary">Edit</a></td>
                                 </tr>

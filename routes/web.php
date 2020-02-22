@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('companies/{company}/update', 'CompaniesController@update')->name('companies-update');
 });
 
-
+    Route::resource('order','OrderController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
