@@ -51,6 +51,7 @@ class ContactsController extends Controller
     public function store(CreateContact $request)
     {
         Contact::create($request->all());
+		$contact->contactAddress->create($request->all());
         return redirect('contacts')->with('alert', 'Contact created!');
     }
 
@@ -75,6 +76,7 @@ class ContactsController extends Controller
     public function update(UpdateContact $request, Contact $contact)
     {
         $contact->update($request->all());
+		$contact->contactAddress->create($request->all());
         return redirect('contacts')->with('alert', 'Contact updated!');
     }
 }

@@ -15,7 +15,7 @@
 <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
     <label for="last_name" class="col-md-4 control-label">Last Name</label>
     <div class="col-md-12">
-        <input id="first_name" type="text" class="form-control" name="last_name"
+        <input id="last_name" type="text" class="form-control" name="last_name"
                value="{{ old('last_name', $contact->last_name) }}">
         @if ($errors->has('last_name'))
             <span class="help-block">
@@ -59,6 +59,19 @@
         @if ($errors->has('contact_role_id'))
             <span class="help-block">
                 <strong>{{ $errors->first('contact_role_id') }}</strong>
+            </span>
+        @endif
+    </div>
+</div>
+
+<div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+    <label for="address" class="col-md-4 control-label">Address</label>
+    <div class="col-md-12">
+        <input id="address" type="text" class="form-control" name="address"
+               value="{{ old('address', $contact->address) }}">
+        @if ($errors->has('address'))
+            <span class="help-block">
+                <strong>{{ $errors->first('address') }}</strong>
             </span>
         @endif
     </div>

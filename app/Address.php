@@ -28,7 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Contact whereLastName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Contact whereUpdatedAt($value)
  */
-class Contact extends Model
+class Address extends Model
 {
 
     /**
@@ -37,27 +37,9 @@ class Contact extends Model
      * @var array
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'company_id',
-		'contact_role_id'
+        'first_line',
+        'second_line',
+        'postcode',
+		'contact_id'
     ];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function company()
-    {
-        return $this->belongsTo(Company::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function contactRole()
-    {
-        return $this->belongsTo(ContactRole::class);
-    }
-	
-
 }
