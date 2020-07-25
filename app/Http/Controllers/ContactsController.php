@@ -13,7 +13,7 @@ class ContactsController extends Controller
 {
     public function index()
     {
-        $contacts = Contact::with(['company', 'contactRole'])->get();
+        $contacts = Contact::with(['company', 'contactRole', 'company.companyStatus', 'company.companyType'])->get();
 
         return view('contacts.index', compact('contacts'));
     }

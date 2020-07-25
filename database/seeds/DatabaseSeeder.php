@@ -51,5 +51,9 @@ class DatabaseSeeder extends Seeder
         });
 
         \Illuminate\Support\Facades\DB::commit();
+
+        $this->call([
+            AddressSeeder::class,
+        ]);
     }
 }

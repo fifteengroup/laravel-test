@@ -44,6 +44,15 @@ class Contact extends Model
     ];
 
     /**
+     * @param $value
+     * @return string
+     */
+    public function getNameAttribute($value)
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function company()
@@ -57,6 +66,14 @@ class Contact extends Model
     public function contactRole()
     {
         return $this->belongsTo(ContactRole::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
     }
 
 }
