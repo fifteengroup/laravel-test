@@ -23,7 +23,7 @@ class AddressesController extends Controller
     public function create()
     {
         $address = new Address;
-        $contacts = Contact::pluck('name', 'id');
+        $contacts = Contact::all()->pluck('name', 'id');
 
         return view('addresses.create', compact('address', 'contacts'));
     }
