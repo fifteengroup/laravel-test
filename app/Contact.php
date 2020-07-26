@@ -76,4 +76,12 @@ class Contact extends Model
         return $this->hasMany(Address::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
 }

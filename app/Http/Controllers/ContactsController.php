@@ -42,6 +42,13 @@ class ContactsController extends Controller
         return view('contacts.edit', compact('contact', 'companies', 'contactRoles'));
     }
 
+    public function show(Contact $contact)
+    {
+        $addresses = $contact->addresses()->get();
+
+        return view('contacts.show', compact('contact', 'addresses'));
+    }
+
     public function update(UpdateContact $request, Contact $contact)
     {
         $contact->update($request->all());

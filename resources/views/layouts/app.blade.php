@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" />
     @yield('head')
 </head>
 <body>
@@ -34,9 +35,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link" href="{{ route('companies') }}">Companies</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('orders') }}">Orders</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('contacts') }}">Contacts</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('addresses') }}">Addresses</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('companies') }}">Companies</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -52,6 +54,30 @@
                                 </li>
                             @endif
                         @else
+
+                            @if(Auth::user()->unreadNotifications->count())
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        <i class="fa fa-bell" aria-hidden="true"></i>
+                                        <span class="badge badge-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                    </a>
+
+                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        @foreach(Auth::user()->unreadNotifications  as $notification)
+                                            @if($notification->type === 'App\Notifications\ProcessOrders')
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ route('orders.show', $notification->data['order_number']) }}">
+                                                        New Order waiting to be processed.
+                                                        Order No#{{ $notification->data['order_number']}}
+                                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endif
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

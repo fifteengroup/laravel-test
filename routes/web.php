@@ -19,6 +19,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('contacts', 'ContactsController@index')->name('contacts');
     Route::get('contacts/create', 'ContactsController@create')->name('contacts.create');
     Route::post('contacts/create', 'ContactsController@store')->name('contacts.store');
+    Route::get('contacts/{contact}', 'ContactsController@show')->name('contacts.show');
     Route::get('contacts/{contact}/edit', 'ContactsController@edit')->name('contacts.edit');
     Route::post('contacts/{contact}/update', 'ContactsController@update')->name('contacts.update');
 
@@ -33,6 +34,21 @@ Route::middleware(['auth'])->group(function () {
     Route::post('companies/create', 'CompaniesController@store')->name('companies.store');
     Route::get('companies/{company}/edit', 'CompaniesController@edit')->name('companies.edit');
     Route::post('companies/{company}/update', 'CompaniesController@update')->name('companies.update');
+
+    Route::get('orders', 'ordersController@index')->name('orders');
+    Route::get('orders/create', 'ordersController@create')->name('orders.create');
+    Route::post('orders/create', 'ordersController@store')->name('orders.store');
+    Route::get('orders/{order}', 'ordersController@show')->name('orders.show');
+    Route::get('orders/{order}/edit', 'ordersController@edit')->name('orders.edit');
+    Route::get('orders/{order}/readytodespatch', 'ordersController@updateStatusReadyToDespatch')->name('orders.updateStatusReadyToDespatch');
+    Route::get('orders/{order}/complete', 'ordersController@updateStatusComplete')->name('orders.updateStatusComplete');
+
+    Route::get('orders/{order}/orderItems/create', 'orderItemsController@create')->name('orderItems.create');
+    Route::post('orders/{order}/orderItems/create', 'orderItemsController@store')->name('orderItems.store');
+    Route::get('orders/{order}/orderItems/{orderItem}', 'orderItemsController@show')->name('orderItems.show');
+    Route::get('orders/{order}/orderItems/{orderItem}/edit', 'orderItemsController@edit')->name('orderItems.edit');
+    Route::post('orders/{order}/orderItems/{orderItem}/update', 'orderItemsController@update')->name('orderItems.update');
+
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

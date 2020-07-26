@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Create Address</div>
+                <div class="card-header">Edit Contact</div>
                 <div class="card-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('addresses.create') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('addresses.update', $address) }}">
                         @include('addresses.partials.form')
                         <div class="form-group">
                             <div class="col-md-6">
