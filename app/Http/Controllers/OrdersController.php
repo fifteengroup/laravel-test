@@ -17,7 +17,7 @@ class OrdersController extends Controller
 {
     public function index()
     {
-        $orders = Order::with(['contact', 'contact.company'])->get();
+        $orders = Order::with(['contact', 'contact.company'])->orderByDesc('id')->get();
 
         return view('orders.index', compact('orders'));
     }
