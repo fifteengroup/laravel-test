@@ -79,7 +79,11 @@ class OrdersController extends Controller
     {
         //Mark Process Order Notification as read
         if (Auth::user()->unreadNotifications->count()) {
-            Auth::user()->unreadNotifications->markAsRead();
+            foreach(Auth::user()->unreadNotifications  as $notification) {
+                if ($notification->type === 'App\Notifications\ProcessOrders' && $notification->data['order_number'] === $order->id) {
+                    $notification->markAsRead();
+                }
+            }
         }
 
         return $this->show($order);
