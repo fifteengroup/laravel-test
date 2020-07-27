@@ -39,16 +39,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('orders/create', 'ordersController@create')->name('orders.create');
     Route::post('orders/create', 'ordersController@store')->name('orders.store');
     Route::get('orders/{order}', 'ordersController@show')->name('orders.show');
-    Route::get('orders/{order}/edit', 'ordersController@edit')->name('orders.edit');
     Route::get('orders/{order}/readytodespatch', 'ordersController@updateStatusReadyToDespatch')->name('orders.updateStatusReadyToDespatch');
     Route::get('orders/{order}/complete', 'ordersController@updateStatusComplete')->name('orders.updateStatusComplete');
+    Route::get('orders/{order}/notificationmarkasread', 'ordersController@notificationMarkAsRead')->name('orders.notificationMarkAsRead');
 
     Route::get('orders/{order}/orderItems/create', 'orderItemsController@create')->name('orderItems.create');
     Route::post('orders/{order}/orderItems/create', 'orderItemsController@store')->name('orderItems.store');
     Route::get('orders/{order}/orderItems/{orderItem}', 'orderItemsController@show')->name('orderItems.show');
-    Route::get('orders/{order}/orderItems/{orderItem}/edit', 'orderItemsController@edit')->name('orderItems.edit');
-    Route::post('orders/{order}/orderItems/{orderItem}/update', 'orderItemsController@update')->name('orderItems.update');
-
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

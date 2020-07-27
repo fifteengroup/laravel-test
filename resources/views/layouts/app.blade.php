@@ -55,28 +55,34 @@
                             @endif
                         @else
 
-                            @if(Auth::user()->unreadNotifications->count())
+
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         <i class="fa fa-bell" aria-hidden="true"></i>
-                                        <span class="badge badge-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                        @if(Auth::user()->unreadNotifications->count())
+                                            <span class="badge badge-danger">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                        @endif
                                     </a>
 
                                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        @foreach(Auth::user()->unreadNotifications  as $notification)
-                                            @if($notification->type === 'App\Notifications\ProcessOrders')
-                                                <li>
-                                                    <a class="dropdown-item" href="{{ route('orders.show', $notification->data['order_number']) }}">
-                                                        New Order waiting to be processed.
-                                                        Order No#{{ $notification->data['order_number']}}
-                                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                                    </a>
-                                                </li>
-                                            @endif
-                                        @endforeach
+                                        @if(Auth::user()->unreadNotifications->count())
+                                            @foreach(Auth::user()->unreadNotifications  as $notification)
+                                                @if($notification->type === 'App\Notifications\ProcessOrders')
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{ route('orders.notificationMarkAsRead', $notification->data['order_number']) }}">
+                                                            New Order waiting to be processed.
+                                                            Order No#{{ $notification->data['order_number']}}
+                                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            <li><span class="dropdown-item">No notifications available</span></li>
+                                        @endif
                                     </ul>
                                 </li>
-                            @endif
+
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

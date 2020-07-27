@@ -41,10 +41,6 @@ class OrdersController extends Controller
 
     public function show(Order $order)
     {
-        //Mark Process Order Notification as read
-        if (Auth::user()->unreadNotifications->count()) {
-            Auth::user()->unreadNotifications->markAsRead();
-        }
 
         return view('orders.show', compact('order'));
     }
@@ -77,5 +73,15 @@ class OrdersController extends Controller
             ]);
 
         return redirect()->route('orders', [$order]);
+    }
+
+    public function notificationMarkAsRead(Order $order)
+    {
+        //Mark Process Order Notification as read
+        if (Auth::user()->unreadNotifications->count()) {
+            Auth::user()->unreadNotifications->markAsRead();
+        }
+
+        return $this->show($order);
     }
 }
