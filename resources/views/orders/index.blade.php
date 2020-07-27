@@ -18,12 +18,12 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Order No#</th>
-                                <th>Status</th>
+                                <th>@sortablelink('id', 'Order No#')</th>
+                                <th>@sortablelink('status')</th>
                                 <th>Name</th>
                                 <th>Company</th>
-                                <th>Item Count</th>
-                                <th>Total (£)</th>
+                                <th>@sortablelink('item_count', 'Item Count')</th>
+                                <th>@sortablelink('total', 'Total (£)')</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -51,6 +51,7 @@
                             @endforeach
                             </tbody>
                         </table>
+                        {!! $orders->appends(\Request::except('page'))->render() !!}
                     </div>
                 </div>
             </div>

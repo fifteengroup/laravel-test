@@ -17,7 +17,7 @@ class OrdersController extends Controller
 {
     public function index()
     {
-        $orders = Order::with(['contact', 'contact.company'])->orderByDesc('id')->get();
+        $orders = Order::with(['contact', 'contact.company'])->sortable()->paginate(5);
 
         return view('orders.index', compact('orders'));
     }

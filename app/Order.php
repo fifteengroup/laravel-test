@@ -3,9 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Order extends Model
 {
+
+    use Sortable;
+
+    public $sortable = [
+        'id',
+        'status',
+        'item_count',
+        'total',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
