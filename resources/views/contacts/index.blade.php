@@ -17,6 +17,7 @@
 
                     <div class="card-body">
                         <table class="table">
+                            {{ $contacts->links() }}
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -40,7 +41,10 @@
                                 </tr>
                             @endforeach
                             </tbody>
+
                         </table>
+
+                        {{ $contacts->links() }}
                     </div>
                 </div>
             </div>
