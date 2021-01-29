@@ -31,7 +31,7 @@
             <option value="">Please select...</option>
             @foreach($companies as $id => $name)
                 <option value="{{ $id }}"
-                        {{ $id == old('company_id', $contact->company_id) ? ' selected' : ''}}>
+                    {{ $id == old('company_id', $contact->company_id) ? ' selected' : ''}}>
                     {{ $name }}
                 </option>
             @endforeach
@@ -51,7 +51,7 @@
             <option value="">Please select...</option>
             @foreach($contactRoles as $id => $name)
                 <option value="{{ $id }}"
-                        {{ $id == old('contact_role_id', $contact->contact_role_id) ? ' selected' : ''}}>
+                    {{ $id == old('contact_role_id', $contact->contact_role_id) ? ' selected' : ''}}>
                     {{ $name }}
                 </option>
             @endforeach
@@ -63,3 +63,5 @@
         @endif
     </div>
 </div>
+<address-form :addresses="{{$contact->addresses}}"></address-form>
+

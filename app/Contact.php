@@ -59,4 +59,8 @@ class Contact extends Model
         return $this->belongsTo(ContactRole::class);
     }
 
+    public function addresses()
+    {
+        return $this->hasMany(ContactAddress::class);
+    }
 }
