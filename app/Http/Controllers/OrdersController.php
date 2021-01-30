@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Contact;
+use App\Http\Requests\CreateOrder;
+use App\Http\Requests\UpdateOrder;
+use App\Mail\OrderCreated;
 use App\Order;
 use App\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrdersController extends Controller
 {
@@ -23,7 +27,7 @@ class OrdersController extends Controller
         return view('orders.create', compact('order', 'contacts'));
     }
 
-    public function store(Request $request)
+    public function store(CreateOrder $request)
     {
         $requestPayload = $request->all();
         $orderItems = $requestPayload['item'] ?? [];
@@ -35,6 +39,9 @@ class OrdersController extends Controller
         }
         $order->items()->delete();
         $order->items()->saveMany($orderItems);
+
+        $exampleAddress = 'info@pretendcompany.com';
+        Mail::to($exampleAddress)->queue(new OrderCreated($order));
         return redirect('orders')->with('alert', 'Order created!');
     }
 
@@ -44,7 +51,7 @@ class OrdersController extends Controller
         return view('orders.edit', compact('order', 'contacts'));
     }
 
-    public function update(Request $request, Order $order)
+    public function update(UpdateOrder $request, Order $order)
     {
         $requestPayload = $request->all();
         $orderItems = $requestPayload['item'] ?? [];
