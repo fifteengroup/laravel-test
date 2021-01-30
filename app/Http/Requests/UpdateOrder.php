@@ -25,6 +25,7 @@ class UpdateOrder extends FormRequest
     {
         return [
             'contact_id' => 'required',
+            'item' => 'required|array|min:1',
             'item.*.product_name'=>'required',
             'item.*.price'=>'required|numeric'
         ];

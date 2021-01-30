@@ -19,6 +19,11 @@
         @endif
     </div>
 </div>
+@if ($errors->has('item'))
+    <span class="help-block">
+                <strong>{{ $errors->first('item') }}</strong>
+            </span>
+@endif
 <order-item-form :order-items="{{$order->items}}"></order-item-form>
 
 
