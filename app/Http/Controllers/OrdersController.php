@@ -14,10 +14,38 @@ use Illuminate\Support\Facades\Mail;
 
 class OrdersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::paginate(50);
-        return view('orders.index', compact('orders'));
+        $sort = $request->query('sort') ?? 'id';
+        //Cast user input to controllable values for use in query
+        $order = $request->query('order') === 'desc' ? 'desc' :'asc' ;
+
+        $sortOptions = [
+            'sort' => [
+                'Order Number' => 'id',
+                'Total Cost' => 'total_cost',
+                'Item Count ' => 'item_count'
+            ],
+            'order' => [
+                'Ascending' => 'asc',
+                'Descending' => 'desc'
+            ]
+        ];
+
+        if ($sort === 'item_count') {
+            $orders = Order::query()->leftJoin('order_items', 'orders.id', '=', 'order_items.order_id')->select('orders.*')
+                ->groupBy('orders.id')
+                ->orderByRaw('sum(order_items.price)'. $order);
+        } elseif ($sort === 'total_cost') {
+            $orders = Order::query()->leftJoin('order_items', 'orders.id', '=', 'order_items.order_id')->select('orders.*')
+                ->groupBy('orders.id')
+                ->orderByRaw('sum(order_items.price)'. $order);
+        } else {
+            $orders = Order::orderBy($sort, $order);
+        }
+
+        $orders = $orders->paginate(50);
+        return view('orders.index', compact('orders', 'sortOptions', 'sort', 'order'));
     }
 
     public function create(Request $request)
