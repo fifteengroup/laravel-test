@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="{{route('orders')}}" method="GET" class="flex-wrap flex-row float-left"
+                        <form action="{{route('orders')}}" method="GET" class="flex-wrap flex-row"
                               role="group">
                             <div class="form-group">
                                 <label for="sort">Sort By</label>
@@ -43,9 +43,8 @@
                                 </button>
                             </div>
                         </form>
-
+                        <div class="form-group">{{ $orders->links() }}</div>
                         <table class="table">
-                            {{ $orders->links() }}
                             <thead>
                             <tr>
                                 <th>#</th>

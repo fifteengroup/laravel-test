@@ -11,6 +11,8 @@ class Order extends Model
     ];
     protected $appends = [
         'total_cost',
+        'item_count',
+        'company_name'
     ];
 
     public function contact()
@@ -26,6 +28,16 @@ class Order extends Model
     public function getTotalCostAttribute()
     {
         return $this->items()->sum('price');
+    }
+
+    public function getItemCountAttribute()
+    {
+        return $this->items()->count();
+    }
+
+    public function getCompanyNameAttribute()
+    {
+        return $this->contact->company->name;
     }
 
 }

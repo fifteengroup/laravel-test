@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Contact;
+use App\Events\OrderCreated as OrderCreatedEvent;
 use App\Http\Requests\CreateOrder;
 use App\Http\Requests\UpdateOrder;
 use App\Mail\OrderCreated;
@@ -69,7 +70,10 @@ class OrdersController extends Controller
         $order->items()->saveMany($orderItems);
 
         $exampleAddress = 'info@pretendcompany.com';
+        //Dispatch events to send mail and reminder notification
         Mail::to($exampleAddress)->queue(new OrderCreated($order));
+        OrderCreatedEvent::dispatch($order);
+
         return redirect('orders')->with('alert', 'Order created!');
     }
 

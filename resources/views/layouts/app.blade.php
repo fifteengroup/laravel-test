@@ -78,6 +78,7 @@
         <main class="py-4">
             @yield('content')
         </main>
+        <order-notification></order-notification>
     </div>
 </body>
 </html>
