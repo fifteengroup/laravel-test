@@ -10,6 +10,7 @@ use App\Http\Requests\CreateCompanyContactOrder;
 use App\Http\Requests\CreateContact;
 use App\Http\Requests\UpdateCompanyContactOrder;
 use App\Http\Requests\UpdateContact;
+use App\Notifications\NewOrderCreated;
 use Illuminate\Http\Request;
 
 /**
@@ -47,7 +48,8 @@ class CompanyContactOrderController extends Controller
     public function store(CreateCompanyContactOrder $request)
     {
 //        dd($request->all());
-        CompanyContactOrder::create($request->all());
+        $companyContactOrder = CompanyContactOrder::create($request->all());
+        $companyContactOrder->notify(new NewOrderCreated);
 
         return redirect('orders')->with('alert', 'Order created!');
     }

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class CompanyContactOrder
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CompanyContactOrder extends Model
 {
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
