@@ -26,6 +26,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        // Add cron schedule point to Laravel installation on the server
+
+        // Query for new orders every 30 minutes and sent notification
     }
 
     /**
