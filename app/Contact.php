@@ -44,6 +44,14 @@ class Contact extends Model
     ];
 
     /**
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function company()
