@@ -39,6 +39,8 @@
                                            class="btn btn-primary">Edit</a></td>
                                 </tr>
                             @endforeach
+
+                            {{ $contacts->links() }}
                             </tbody>
                         </table>
                     </div>
