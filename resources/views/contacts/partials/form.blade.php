@@ -63,3 +63,59 @@
         @endif
     </div>
 </div>
+
+<div class="form-group{{ $errors->has('contact_addresses') ? ' has-error' : '' }}">
+    <label for="contact_addresses" class="col-md-4 control-label">Contact Addresses</label>
+    <div class="col-md-12">
+        <div class="d-flex">
+            <input type="text" name="address" id="address" class="form-control" value="">
+            <button type="button" id="addAddress" class="btn btn-success">
+                Add
+            </button>
+        </div>
+    </div>
+    <div class="contact-addresses col-md-12">
+        @foreach($contact->contactAddresses as $id => $contactAddress)
+            <div class="contact-address d-flex">
+                <input type="text" name="addresses[]" class="address form-control" value="{{ $contactAddress->address }}">
+                <button type="button" class="delete-address btn btn-danger">
+                    Delete
+                </button>
+            </div>
+        @endforeach
+    </div>
+    <div id="contactAddressTemplate" class="d-none">
+        <div class="contact-address d-flex">
+            <input type="text" name="addresses[]" class="address form-control" value="">
+            <button type="button" class="delete-address btn btn-danger">
+                Delete
+            </button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        var contactAddressTemplate = $('#contactAddressTemplate').children().clone();
+        $('#contactAddressTemplate').remove();
+
+        function addAddress() {
+            var address = $('#address'),
+                contactAddress = contactAddressTemplate.clone().find('.address').val(address.val());
+            $('.contact-addresses').prepend(contactAddress);
+            address.val('');
+        }
+
+        $(document).on('click', '#addAddress', addAddress);
+        $('#address').keydown(function(e) {
+            if (e.keyCode === 13) { // Enter key
+                e.preventDefault();
+                addAddress();
+            }
+        });
+
+        $(document).on('click', '.delete-address', function(event) {
+            $(this).closest('.contact-address').remove();
+        });
+    });
+</script>

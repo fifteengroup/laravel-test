@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property-read \App\Company $company
  * @property-read \App\ContactRole $contactRole
+ * @property-read \App\ContactAddress $contactAddress
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Contact newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Contact newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Contact query()
@@ -57,6 +58,14 @@ class Contact extends Model
     public function contactRole()
     {
         return $this->belongsTo(ContactRole::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contactAddresses()
+    {
+        return $this->hasMany(ContactAddress::class);
     }
 
 }

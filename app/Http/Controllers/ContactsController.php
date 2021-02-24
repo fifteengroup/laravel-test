@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Contact;
+use App\ContactAddress;
 use App\ContactRole;
 use App\Http\Requests\CreateContact;
 use App\Http\Requests\UpdateContact;
@@ -29,7 +30,8 @@ class ContactsController extends Controller
 
     public function store(CreateContact $request)
     {
-        Contact::create($request->all());
+        $contact = Contact::create($request->all());
+        $this->createContactAddresses($request->addresses, $contact->id);
 
         return redirect('contacts')->with('alert', 'Contact created!');
     }
@@ -38,6 +40,7 @@ class ContactsController extends Controller
     {
         $companies = Company::pluck('name', 'id');
         $contactRoles = ContactRole::pluck('name', 'id');
+        $contact->load('contactAddresses');
 
         return view('contacts.edit', compact('contact', 'companies', 'contactRoles'));
     }
@@ -45,7 +48,29 @@ class ContactsController extends Controller
     public function update(UpdateContact $request, Contact $contact)
     {
         $contact->update($request->all());
+        $contactId = $contact->id;
+
+        ContactAddress::contactId($contactId)->delete();
+        $this->createContactAddresses($request->addresses, $contactId);
 
         return redirect('contacts')->with('alert', 'Contact updated!');
+    }
+
+    private function createContactAddresses($addresses, $contactId) {
+        foreach ($addresses as $address) {
+            $this->createContactAddress($address, $contactId);
+        }
+    }
+
+    private function createContactAddress($address, $contactId) {
+        if (empty($address)) {
+            return;
+        }
+
+        $contactAddress = new ContactAddress([
+            'address' => $address
+        ]);
+        $contactAddress->contact_id = $contactId;
+        $contactAddress->save();
     }
 }
