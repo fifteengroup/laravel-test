@@ -30,20 +30,20 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($addresses as $contact)
+                            @foreach($addresses as $address)
                                 <tr>
-                                    <td>{{ $contact->id }}</td>
+                                    <td>{{ $address->id }}</td>
                                     <td>
-                                        {{ $contact->line_1 }}<br>
-                                        {{ $contact->line_2 }}<br>
-                                        {{ $contact->line_3 }}                                    
+                                        {{ $address->line_1 }}<br>
+                                        {{ $address->line_2 }}<br>
+                                        {{ $address->line_3 }}                                    
                                     </td>
-                                    <td>{{ $contact->town }}</td>
-                                    <td>{{ $contact->city }}</td>
-                                    <td>{{ $contact->county }}</td>
-                                    <td>{{ $contact->country }}</td>
-                                    <td>{{ $contact->postcode }}</td>
-                                    <td><a href="{{ route('addresses.edit', $contact) }}"
+                                    <td>{{ $address->town }}</td>
+                                    <td>{{ $address->city }}</td>
+                                    <td>{{ $address->county }}</td>
+                                    <td>{{ $address->country }}</td>
+                                    <td>{{ $address->postcode }}</td>
+                                    <td><a href="{{ route('addresses.edit', $address) }}"
                                            class="btn btn-primary">Edit</a></td>
                                 </tr>
                             @endforeach

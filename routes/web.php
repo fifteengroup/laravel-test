@@ -34,6 +34,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('addresses/{address}/edit', 'AddressController@edit')->name('addresses.edit');
     Route::post('addresses/{address}/update', 'AddressController@update')->name('addresses.update');
 
+    Route::get('orders', 'OrderController@index')->name('orders');
+    Route::get('orders/create', 'OrderController@create')->name('orders.create');
+    Route::post('orders/create', 'OrderController@store')->name('orders.store');
+    Route::get('orders/{order}/edit', 'OrderController@edit')->name('orders.edit');
+    Route::post('orders/{order}/update', 'OrderController@update')->name('orders.update');
+
+    Route::get('order-items', 'OrderItemController@index')->name('order-items');
+    Route::get('order-items/create', 'OrderItemController@create')->name('order-items.create');
+    Route::post('order-items/create', 'OrderItemController@store')->name('order-items.store');
+    Route::get('order-items/{order_item}/edit', 'OrderItemController@edit')->name('order-items.edit');
+    Route::post('order-items/{order_item}/update', 'OrderItemController@update')->name('order-items.update');
+
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
