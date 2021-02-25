@@ -28,11 +28,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('companies/{company}/edit', 'CompaniesController@edit')->name('companies.edit');
     Route::post('companies/{company}/update', 'CompaniesController@update')->name('companies.update');
 
-    Route::get('orders', 'OrdersController@index')->name('orders');
-    Route::get('orders/create', 'OrdersController@create')->name('orders.create');
-    Route::post('orders/create', 'OrdersController@store')->name('orders.store');
-    Route::get('orders/{order}/edit', 'OrdersController@edit')->name('orders.edit');
-    Route::post('orders/{order}/update', 'OrdersController@update')->name('orders.update');
+    Route::group(['prefix' => 'orders'], function ($router) {
+        $router->get('', 'OrdersController@index')->name('orders');
+        $router->get('list', 'OrdersController@list')->name('orders.list');
+        $router->get('create', 'OrdersController@create')->name('orders.create');
+        $router->post('create', 'OrdersController@store')->name('orders.store');
+        $router->get('{order}/edit', 'OrdersController@edit')->name('orders.edit');
+        $router->post('{order}/update', 'OrdersController@update')->name('orders.update');
+    });
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

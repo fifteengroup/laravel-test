@@ -77,6 +77,7 @@
 
         <main class="py-4">
             @yield('content')
+            @include('toast.order')
         </main>
     </div>
 </body>

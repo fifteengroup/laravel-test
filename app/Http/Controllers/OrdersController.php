@@ -19,6 +19,21 @@ class OrdersController extends Controller
         return view('orders.index', compact('orders'));
     }
 
+    public function list(Request $request)
+    {
+        $request->validate([
+            'createdAtGreaterThan' => 'nullable|date_format:Y-m-d\TH:i:s.v\Z'
+        ]);
+
+        $builder = Order::select();
+
+        if ($request->has('createdAtGreaterThan')) {
+            $builder->createdAtGreaterThan($request->get('createdAtGreaterThan'));
+        }
+
+        return $builder->get();
+    }
+
     public function create()
     {
         $order = new Order;

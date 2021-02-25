@@ -53,4 +53,8 @@ class Order extends Model
         return $this->belongsTo(Contact::class);
     }
 
+    public function scopeCreatedAtGreaterThan($query, $value) {
+        return $query->where('created_at', '>', $value);
+    }
+
 }
