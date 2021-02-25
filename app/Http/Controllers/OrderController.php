@@ -34,6 +34,8 @@ class OrderController extends Controller
         $order = Order::create($request->all());
         $order->order_items()->sync($request->order_items);
 
+        Mail::to('info@pretendcompany.com')->send(new OrderCreated($order));
+
         return redirect('orders')->with('alert', 'Order created!');
     }
 
