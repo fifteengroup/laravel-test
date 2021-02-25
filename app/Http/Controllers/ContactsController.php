@@ -13,7 +13,7 @@ class ContactsController extends Controller
 {
     public function index()
     {
-        $contacts = Contact::paginate(15);
+        $contacts = Contact::withCount('addresses')->paginate(15);
 
         return view('contacts.index', compact('contacts'));
     }
