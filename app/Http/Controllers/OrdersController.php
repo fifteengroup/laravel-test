@@ -6,7 +6,9 @@ use App\Contact;
 use App\Order;
 use App\Http\Requests\CreateOrder;
 use App\Http\Requests\UpdateOrder;
+use App\Mail\OrderCreated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrdersController extends Controller
 {
@@ -28,6 +30,8 @@ class OrdersController extends Controller
     public function store(CreateOrder $request)
     {
         $order = Order::create($request->all());
+
+        Mail::to('info@pretendcompany.com')->send(new OrderCreated($order));
 
         return redirect('orders')->with('alert', 'Contact created!');
     }
