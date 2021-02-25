@@ -14,7 +14,7 @@ class OrdersController extends Controller
 {
     public function index()
     {
-        $orders = Order::paginate(50);
+        $orders = Order::sortable()->paginate(50);
 
         return view('orders.index', compact('orders'));
     }
