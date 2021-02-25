@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 /**
  * App\Order
@@ -28,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Order extends Model
 {
+    use Sortable;
 
     /**
      * The attributes that are mass assignable.
@@ -40,6 +42,8 @@ class Order extends Model
         'quantity',
         'contact_id'
     ];
+
+    public $sortable = ['price', 'quantity'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

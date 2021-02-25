@@ -19,8 +19,8 @@
                             <tr>
                                 <th>#</th>
                                 <th>Product Name</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
+                                <th>@sortablelink('price')</th>
+                                <th>@sortablelink('quantity')</th>
                                 <th>Contact</th>
                                 <th>Actions</th>
                             </tr>
@@ -39,7 +39,7 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {{ $orders->links() }}
+                        {!! $orders->appends(\Request::except('page'))->render() !!}
                     </div>
                 </div>
             </div>
