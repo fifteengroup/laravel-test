@@ -7,47 +7,42 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="btn-group float-right" role="group">
-                            <a href="{{ route('contacts.create') }}" class="btn btn-success">Add new</a>
+                            <a href="{{ route('orders.create') }}" class="btn btn-success">Add new</a>
                         </div>
                         <h2>
-                            Contacts
+                            Orders
                         </h2>
-
                     </div>
-
                     <div class="card-body">
                         <table class="table">
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Role</th>
-                                <th>Company</th>
-                                <th>Company Status</th>
+                                <th>Product Name</th>
+                                <th>@sortablelink('price')</th>
+                                <th>@sortablelink('quantity')</th>
+                                <th>Contact</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($contacts as $contact)
+                            @foreach($orders as $order)
                                 <tr>
-                                    <td>{{ $contact->id }}</td>
-                                    <td>{{ $contact->first_name }} {{ $contact->last_name }}</td>
-                                    <td>{{ $contact->contactRole->name }}</td>
-                                    <td>{{ $contact->company->name }} ({{ $contact->company->companyType->name }})</td>
-                                    <td>{{ $contact->company->companyStatus->name }}</td>
-                                    <td><a href="{{ route('contacts.edit', $contact) }}"
+                                    <td>{{ $order->id }}</td>
+                                    <td>{{ $order->product_name }}</td>
+                                    <td>{{ $order->price }}</td>
+                                    <td>{{ $order->quantity }}</td>
+                                    <td>{{ $order->contact->first_name }} {{ $order->contact->last_name }}</td>
+                                    <td><a href="{{ route('orders.edit', $order) }}"
                                            class="btn btn-primary">Edit</a></td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        {{ $contacts->links() }}
+                        {!! $orders->appends(\Request::except('page'))->render() !!}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
 @endsection
