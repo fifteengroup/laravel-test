@@ -41,16 +41,16 @@ class Order extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
-    public function order_items()
+    public function items()
     {
-        return $this->belongsToMany(OrderItem::class);
+        return $this->belongsToMany(Item::class);
     }
 
     public function getTotalValueAttribute(){
         $total_value = 0;
 
-        foreach($this->order_items as $order_item){
-            $total_value += ($order_item->price*100);
+        foreach($this->items as $item){
+            $total_value += ($item->price*100);
         }
 
         return number_format($total_value/100,2,'.','');

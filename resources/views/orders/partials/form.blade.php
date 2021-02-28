@@ -19,18 +19,18 @@
     </div>
 </div>
 
-<div class="form-group{{ $errors->has('order_items') ? ' has-error' : '' }}">
+<div class="form-group{{ $errors->has('items') ? ' has-error' : '' }}">
     <label>Items</label>
-    <select name="order_items[]" multiple id="order_items" class="form-control">
-        @foreach($order_items as $order_item)
-            <option value="{{ $order_item->id }}" {{ $order->order_items->contains('id', $order_item->id) ? ' selected' : '' }}>
-                {{ $order_item->product_name }}
+    <select name="items[]" multiple id="items" class="form-control">
+        @foreach($items as $item)
+            <option value="{{ $item->id }}" {{ $order->items->contains('id', $item->id) ? ' selected' : '' }}>
+                {{ $item->product_name }}
             </option>
         @endforeach
     </select>
-    @if ($errors->has('order_items'))
+    @if ($errors->has('items'))
         <span class="help-block">
-            <strong>{{ $errors->first('order_items') }}</strong>
+            <strong>{{ $errors->first('items') }}</strong>
         </span>
     @endif
 </div>

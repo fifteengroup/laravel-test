@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Address
  *
- * @property-read \App\Contact $contact
+ * @property-read \App\Address $address
  * @mixin \Eloquent
  * @property int $id
  * @property string $line_1

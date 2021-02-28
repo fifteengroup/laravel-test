@@ -12,22 +12,21 @@
                         <h2>
                             Addresses
                         </h2>
-
                     </div>
 
                     <div class="card-body">
                         <table class="table">
                             <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Address</th>
-                                <th>Town</th>
-                                <th>City</th>
-                                <th>County</th>
-                                <th>Country</th>
-                                <th>Postcode</th>
-                                <th>Actions</th>
-                            </tr>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Address</th>
+                                    <th>Town</th>
+                                    <th>City</th>
+                                    <th>County</th>
+                                    <th>Country</th>
+                                    <th>Postcode</th>
+                                    <th>Actions</th>
+                                </tr>
                             </thead>
                             <tbody>
                             @foreach($addresses as $address)
@@ -43,14 +42,18 @@
                                     <td>{{ $address->county }}</td>
                                     <td>{{ $address->country }}</td>
                                     <td>{{ $address->postcode }}</td>
-                                    <td><a href="{{ route('addresses.edit', $address) }}"
-                                           class="btn btn-primary">Edit</a></td>
+                                    <td>
+                                        <a href="{{ route('addresses.edit', $address) }}" class="btn btn-primary">
+                                            Edit
+                                        </a>
+                                    </td>
                                 </tr>
-                            @endforeach
-
-                            {{ $addresses->links() }}
+                            @endforeach                            
                             </tbody>
                         </table>
+
+                        {{ $addresses->links() }}
+
                     </div>
                 </div>
             </div>

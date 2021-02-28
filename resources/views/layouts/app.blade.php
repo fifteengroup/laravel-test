@@ -38,7 +38,7 @@
                         <li class="nav-item"><a class="nav-link" href="{{ route('companies') }}">Companies</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('addresses') }}">Addresses</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('orders') }}">Orders</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('order-items') }}">Order Items</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('items') }}">Items</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

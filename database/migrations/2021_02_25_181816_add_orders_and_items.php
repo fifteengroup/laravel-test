@@ -24,7 +24,7 @@ class AddOrdersAndItems extends Migration
             $table->timestamps();
         });
 
-        Schema::create('order_items', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
             $table->string('product_name');
             $table->integer('price');
@@ -32,19 +32,19 @@ class AddOrdersAndItems extends Migration
             $table->timestamps();
         });
 
-        Schema::create('order_order_item', function (Blueprint $table) {
+        Schema::create('item_order', function (Blueprint $table) {
             $table->increments('id');
 
             $table->unsignedInteger('order_id');
-            $table->unsignedInteger('order_item_id');
+            $table->unsignedInteger('item_id');
 
             $table->foreign('order_id')
                     ->references('id')
                     ->on('orders');
             
-            $table->foreign('order_item_id')
+            $table->foreign('item_id')
                     ->references('id')
-                    ->on('order_items');
+                    ->on('items');
             
             $table->timestamps();
         });
@@ -58,13 +58,13 @@ class AddOrdersAndItems extends Migration
     public function down()
     {
 
-        Schema::table('order_order_item', function (Blueprint $table) {
-            $table->dropForeign('order_order_item_order_id_foreign');
-            $table->dropForeign('order_order_item_order_item_id_foreign');
+        Schema::table('item_order', function (Blueprint $table) {
+            $table->dropForeign('item_order_order_id_foreign');
+            $table->dropForeign('item_order_item_id_foreign');
         });
 
         Schema::drop('orders');
-        Schema::drop('order_items');
-        Schema::drop('order_order_item');
+        Schema::drop('items');
+        Schema::drop('item_order');
     }
 }

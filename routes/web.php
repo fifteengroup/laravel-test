@@ -40,11 +40,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('orders/{order}/edit', 'OrderController@edit')->name('orders.edit');
     Route::post('orders/{order}/update', 'OrderController@update')->name('orders.update');
 
-    Route::get('order-items', 'OrderItemController@index')->name('order-items');
-    Route::get('order-items/create', 'OrderItemController@create')->name('order-items.create');
-    Route::post('order-items/create', 'OrderItemController@store')->name('order-items.store');
-    Route::get('order-items/{order_item}/edit', 'OrderItemController@edit')->name('order-items.edit');
-    Route::post('order-items/{order_item}/update', 'OrderItemController@update')->name('order-items.update');
+    Route::get('items', 'ItemController@index')->name('items');
+    Route::get('items/create', 'ItemController@create')->name('items.create');
+    Route::post('items/create', 'ItemController@store')->name('items.store');
+    Route::get('items/{item}/edit', 'ItemController@edit')->name('items.edit');
+    Route::post('items/{item}/update', 'ItemController@update')->name('items.update');
 
 });
 
