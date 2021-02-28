@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Address;
+use App\Contact;
+use App\Http\Requests\CreateAddress;
+use App\Http\Requests\UpdateAddress;
+use Illuminate\Http\Request;
+
+class AddressController extends Controller
+{
+    public function index()
+    {
+        $addresses = Address::paginate(15);
+
+        return view('addresses.index', compact('addresses'));
+    }
+
+    public function create()
+    {
+        $address = new Address;
+        $contacts = Contact::select('first_name', 'last_name', 'id')->get();
+
+        return view('addresses.create', compact('address', 'contacts'));
+    }
+
+    public function store(CreateAddress $request)
+    {
+       // dd($request->all());
+        Address::create($request->all());
+
+        return redirect('addresses')->with('alert', 'Address created!');
+    }
+
+    public function edit(Address $address)
+    {
+        $contacts = Contact::select('first_name', 'last_name', 'id')->get();
+
+        return view('addresses.edit', compact('address', 'contacts'));
+    }
+
+    public function update(UpdateAddress $request, Address $address)
+    {
+        $address->update($request->all());
+
+        return redirect('addresses')->with('alert', 'Contact updated!');
+    }
+}

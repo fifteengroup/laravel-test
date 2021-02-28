@@ -17,13 +17,13 @@
           <div class="card-body">
             <table class="table">
               <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Company Type</th>
-                <th>Company Status</th>
-                <th>Actions</th>
-              </tr>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Company Type</th>
+                  <th>Company Status</th>
+                  <th>Actions</th>
+                </tr>
               </thead>
               <tbody>
               @foreach($companies as $company)
