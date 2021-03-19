@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Company;
-use App\Contact;
-use App\ContactRole;
+use App\{Company, Contact, ContactRole, ContactAddress};
 use App\Http\Requests\CreateContact;
 use App\Http\Requests\UpdateContact;
-use Illuminate\Http\Request;
+use App\Services\Contact\{StoreService, UpdateService};
+use App\Interfaces\{ContactRepositoryInterface};
 
 class ContactsController extends Controller
 {
+    private $contactRepository;
+
+    public function __construct(ContactRepositoryInterface $contactRepository)
+    {
+        $this->contactRepository = $contactRepository;
+    }
+
     public function index()
     {
-        $contacts = Contact::all();
-
+        $contacts = $this->contactRepository->all();
         return view('contacts.index', compact('contacts'));
     }
 
@@ -29,8 +34,7 @@ class ContactsController extends Controller
 
     public function store(CreateContact $request)
     {
-        Contact::create($request->all());
-
+        (new StoreService($request->all()))->run();
         return redirect('contacts')->with('alert', 'Contact created!');
     }
 
@@ -42,9 +46,9 @@ class ContactsController extends Controller
         return view('contacts.edit', compact('contact', 'companies', 'contactRoles'));
     }
 
-    public function update(UpdateContact $request, Contact $contact)
+    public function update(UpdateContact $request, Contact $contact, ContactAddress $contact_address)
     {
-        $contact->update($request->all());
+        (new UpdateService($contact, $request->all(), $contact_address))->run();
 
         return redirect('contacts')->with('alert', 'Contact updated!');
     }

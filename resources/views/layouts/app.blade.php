@@ -75,8 +75,22 @@
         </nav>
 
         <main class="py-4">
+            @if(session()->has('alert'))
+            <div class="row">
+                <div class="col-4">
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <strong>Success!</strong> {{ session()->get('alert') }}
+                    </div>
+                </div>
+            </div>
+            @endif
             @yield('content')
         </main>
     </div>
+
+    @yield('script')
 </body>
 </html>

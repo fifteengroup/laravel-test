@@ -63,3 +63,67 @@
         @endif
     </div>
 </div>
+<div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+    <label for="address" class="col-md-4 control-label">Address</label>
+    <div class="col-md-12">
+        <textarea name="address[]" id="inputAddress" class="form-control" rows="3" required="required">
+            {{ old('first_name') }}
+        </textarea>
+        @if ($errors->has('address'))
+            <span class="help-block">
+                <strong>{{ $errors->first('address') }}</strong>
+            </span>
+        @endif
+    </div>
+</div>
+<div class="form-group{{ $errors->has('post_code') ? ' has-error' : '' }}">
+    <label for="post_code" class="col-md-4 control-label">Post Code</label>
+    <div class="col-md-12">
+        <input id="post_code" type="text" class="form-control" name="post_code[]"
+               value="{{ old('post_code') }}">
+        @if ($errors->has('post_code'))
+            <span class="help-block">
+                <strong>{{ $errors->first('post_code') }}</strong>
+            </span>
+        @endif
+    </div>
+</div>
+@foreach($contact->addresses as $value)
+    <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+        <label for="address" class="col-md-4 control-label">Address</label>
+        <div class="col-md-12">
+            <textarea name="address[]" id="inputAddress" class="form-control" rows="3" required="required">
+                {{ old('address', $value->address) }}
+            </textarea>
+            @if ($errors->has('address'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('address') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+    <div class="form-group{{ $errors->has('post_code') ? ' has-error' : '' }}">
+        <label for="post_code" class="col-md-4 control-label">Post Code</label>
+        <div class="col-md-12">
+            <input id="post_code" type="text" class="form-control" name="post_code[]"
+                   value="{{ old('post_code', $value->post_code) }}">
+            @if ($errors->has('post_code'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('post_code') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+@endforeach
+
+
+<div class="more_address_fields_wrapper">
+</div>
+<div class="row">
+    <div class="col-md-9">
+    </div>
+    <div class="col-md-3">
+        <a href="#" class="add_more_address_button">+ Add More Addresses</a>
+    </div>
+</div>
+
