@@ -67,7 +67,6 @@
     <label for="address" class="col-md-4 control-label">Address</label>
     <div class="col-md-12">
         <textarea name="address[]" id="inputAddress" class="form-control" rows="3" required="required">
-            {{ old('first_name') }}
         </textarea>
         @if ($errors->has('address'))
             <span class="help-block">
@@ -80,7 +79,7 @@
     <label for="post_code" class="col-md-4 control-label">Post Code</label>
     <div class="col-md-12">
         <input id="post_code" type="text" class="form-control" name="post_code[]"
-               value="{{ old('post_code') }}">
+               value="">
         @if ($errors->has('post_code'))
             <span class="help-block">
                 <strong>{{ $errors->first('post_code') }}</strong>

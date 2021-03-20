@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\ContactRepository;
-use App\Interfaces\ContactRepositoryInterface;
+use App\Repositories\{ContactRepository, OrderRepository};
+use App\Interfaces\{ContactRepositoryInterface, OrderRepositoryInterface};
 
 class RepositoriesServiceProvider extends ServiceProvider
 {
@@ -26,5 +26,6 @@ class RepositoriesServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(ContactRepositoryInterface::class, ContactRepository::class);
+        $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
     }
 }

@@ -27,9 +27,8 @@ class ContactsController extends Controller
     {
         $contact = new Contact;
         $companies = Company::pluck('name', 'id');
-        $contactRoles = ContactRole::pluck('name', 'id');
-
-        return view('contacts.create', compact('contact', 'companies', 'contactRoles'));
+        $contacts = Contact::pluck('name', 'id');
+        return view('contacts.create', compact('contacts', 'companies', 'contact'));
     }
 
     public function store(CreateContact $request)
@@ -49,7 +48,6 @@ class ContactsController extends Controller
     public function update(UpdateContact $request, Contact $contact, ContactAddress $contact_address)
     {
         (new UpdateService($contact, $request->all(), $contact_address))->run();
-
         return redirect('contacts')->with('alert', 'Contact updated!');
     }
 }
