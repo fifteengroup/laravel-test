@@ -4,8 +4,7 @@ namespace App\Services\Order;
 
 use App\{Order, OrderItem, Contact};
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\SendOrderCreationMail;
+use App\Events\OrderCreated;
 
 class StoreService
 {
@@ -38,7 +37,12 @@ class StoreService
             }
             $contact = Contact::findOrFail($order->contact_id);
             //send mail to user when an order is successfully created
-            Mail::send(new SendOrderCreationMail($order, $saved_order_items, $contact));
+            /*
+                *call order created event here to that all required listeners gets notified
+                *after an order has been created.
+            */
+            event(new OrderCreated($order, $saved_order_items, $contact));
+            // Mail::send(new SendOrderCreationMail($order, $saved_order_items, $contact));
         });
 
         return $order;
