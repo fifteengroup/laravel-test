@@ -36,6 +36,7 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="{{ route('contacts') }}">Contacts</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('companies') }}">Companies</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('orders') }}">Orders</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -75,8 +76,22 @@
         </nav>
 
         <main class="py-4">
+            @if(session()->has('alert'))
+            <div class="row">
+                <div class="col-4">
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <strong>Success!</strong> {{ session()->get('alert') }}
+                    </div>
+                </div>
+            </div>
+            @endif
             @yield('content')
         </main>
     </div>
+
+    @yield('script')
 </body>
 </html>

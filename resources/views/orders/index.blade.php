@@ -7,10 +7,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="btn-group float-right" role="group">
-                            <a href="{{ route('contacts.create') }}" class="btn btn-success">Add new</a>
+                            <a href="{{ route('orders.create') }}" class="btn btn-success">Add new</a>
                         </div>
                         <h2>
-                            Contacts
+                            Orders
                         </h2>
                     </div>
 
@@ -19,28 +19,23 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Role</th>
-                                <th>Company</th>
-                                <th>Company Status</th>
+                                <th>Unique Number</th>
+                                <th>Contact</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($contacts as $contact)
+                            @foreach($orders as $order)
                                 <tr>
-                                    <td>{{ $contact->id }}</td>
-                                    <td>{{ $contact->first_name }} {{ $contact->last_name }}</td>
-                                    <td>{{ $contact->contactRole->name }}</td>
-                                    <td>{{ $contact->company->name }} ({{ $contact->company->companyType->name }})</td>
-                                    <td>{{ $contact->company->companyStatus->name }}</td>
-                                    <td><a href="{{ route('contacts.edit', $contact) }}"
-                                           class="btn btn-primary">Edit</a></td>
+                                    <td>{{ $order->id }}</td>
+                                    <td>{{ $order->unique_number }}</td>
+                                    <td>{{ $order->contact->first_name." ".$order->contact->last_name }}</td>
+                                    <td><a href="{{ route('orders.item', ['order_id' => $order->id]) }}">Items</a></td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        {{ $contacts->links() }}
+                        {{ $orders->links() }}
                     </div>
                 </div>
             </div>
